@@ -9,7 +9,7 @@ if [ -d {{ spack_path }} ]; then
   git fetch origin
   git reset --hard origin/spack_for_mache_{{ version }}
 else
-  git clone -b spack_for_mache_{{ version }} git@github.com:E3SM-Project/spack.git {{ spack_path }}
+  git clone -b spack_for_mache_{{ version }} https://github.com/E3SM-Project/spack.git {{ spack_path }}
   cd {{ spack_path }}
 fi
 source share/spack/setup-env.sh
