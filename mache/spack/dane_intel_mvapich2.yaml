@@ -91,6 +91,14 @@ spack:
       - spec: diffutils@3.6
         prefix: /usr
       buildable: false
+    intel:
+      externals:
+      - spec: intel@2021.6.0
+        prefix: /usr/tce/packages/intel-classic/intel-classic-2021.6.0-magic
+        modules:
+        - StdEnv
+        - intel-classic/2021.6.0-magic
+      buildable: false
     intel-oneapi-mkl:
       externals:
       - spec: intel-oneapi-mkl@2022.1.0
