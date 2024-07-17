@@ -1,14 +1,31 @@
 spack:
   specs:
   - intel
-  - intel-oneapi-mkl
   - mvapich2
+  - intel-oneapi-mkl
 {{ specs }}
   config:
     install_missing_compilers: false
   concretizer:
     unify: true
   packages:
+    cmake:
+      externals:
+      - spec: cmake@3.26.5
+        prefix: /usr
+      - spec: cmake@3.23.1
+        prefix: /usr/tce
+      buildable: false
+    curl:
+      externals:
+      - spec: curl@7.61.1+gssapi+ldap+nghttp2
+        prefix: /usr
+      buildable: false
+    gmake:
+      externals:
+      - spec: gmake@4.2.1
+        prefix: /usr
+      buildable: false
     findutils:
       externals:
       - spec: findutils@4.6.0
