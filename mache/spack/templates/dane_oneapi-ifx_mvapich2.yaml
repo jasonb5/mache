@@ -1,0 +1,140 @@
+{%- set compiler = "intel-oneapi-compilers@2023.2.0" %}
+{%- set mpi = "mvapich2@2.3.7" %}
+{%- set mkl = "intel-oneapi-mkl@2022.1.0" %}
+
+spack:
+  specs:
+  - {{ compiler }}
+  - {{ mpi }}
+{%- if e3sm_lapack %}
+  - {{ mkl }}
+{%- endif %}
+{%- if e3sm_hdf5_netcdf %}
+  - hdf5
+  - netcdf-c
+  - netcdf-fortran
+  - parallel-netcdf
+{%- endif %}
+{%- for spec in specs %}
+  - {{ spec }}
+{%- endfor %}
+  concretizer:
+    unify: true
+  packages:
+    all:
+      compiler: [{{ compiler }}]
+      providers:
+        mpi: [{{ mpi }}]
+{{%- if e3sm_lapack %}}
+        lapack: [{{ mkl }}]
+{{%- endif %}
+    curl:
+      externals:
+      - spec: curl@7.61.1+gssapi+ldap+nghttp2
+        prefix: /usr
+      buildable: false
+    perl:
+      externals:
+      - spec: perl@5.26.3+cpanm+opcode+open+shared+threads
+        prefix: /usr
+      buildable: false
+    bzip2:
+      externals:
+      - spec: bzip2@1.0.6
+        prefix: /usr
+      buildable: false
+    m4:
+      externals:
+      - spec: m4@1.4.18
+        prefix: /usr
+      buildable: false
+    zlib:
+      externals:
+      - spec: zlib@1.2.11
+        prefix: /usr
+      buildable: false
+    pkgconf:
+      externals:
+      - spec: pkgconf@1.4.2
+        prefix: /usr
+      buildable: false
+    gmake:
+      externals:
+      - spec: gmake@4.2.1
+        prefix: /usr
+      buildable: false
+    cmake:
+      externals:
+      - spec: cmake@3.26.3
+        prefix: /usr/tce/packages/cmake/cmake-3.26.3
+      buildable: false
+    git:
+      externals:
+      - spec: git@2.29.1+tcltk
+        prefix: /usr/tce/packages/git/git-2.29.1
+      buildable: false
+    subversion:
+      externals:
+      - spec: subversion@1.14.1
+        prefix: /usr/tce/packages/subversion/subversion-1.14.1
+      buildable: false
+    python:
+      externals:
+      - spec: python@3.9.12+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat+pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
+        prefix: /usr/tce/packages/python/python-3.9.12
+      buildable: false
+    mvapich2:
+      externals:
+      - spec: {{ mpi }}~cuda~debug+regcache+wrapperrpath ch3_rank_bits=32 file_systems=lustre,nfs,ufs
+          process_managers=hydra threads=multiple
+        prefix: /usr/tce/packages/mvapich2/mvapich2-2.3.7-intel-2023.2.1-magic
+      buildable: false
+    gcc:
+      externals:
+      - spec: gcc@12.1.1 languages='c,c++,fortran'
+        prefix: /usr/tce/packages/gcc/gcc-12.1.1-magic
+        extra_attributes:
+          compilers:
+            c: /usr/tce/packages/gcc/gcc-12.1.1-magic/bin/gcc
+            cxx: /usr/tce/packages/gcc/gcc-12.1.1-magic/bin/g++
+            fortran: /usr/tce/packages/gcc/gcc-12.1.1-magic/bin/gfortran
+      buildable: false
+{%- if e3sm_lapack %}
+    intel-oneapi-mkl:
+      externals:
+      - spec: {{ mkl }}
+        prefix: /usr/tce/packages/mkl/mkl-2022.1.0
+      buildable: false
+{%- endif %}
+    intel-oneapi-compilers:
+      externals:
+      - spec: {{ compiler }}
+        prefix: /usr/tce/packages/intel/intel-2023.2.1-magic
+        extra_attributes:
+          compilers:
+            c: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icx
+            cxx: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icpx
+            fortran: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/ifx
+      buildable: false
+{%- if e3sm_hdf5_netcdf %}
+    hdf5:
+      externals:
+      - spec: hdf5@1.14.5~cxx~fortran+hl~java+mpi~szip~threadsafe+tools api=v114
+        prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/hdf5-1.14.5
+      buildable: false
+    netcdf-c:
+      externals:
+      - spec: netcdf-c@4.9.2~parallel-netcdf
+        prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/netcdf-c-4.9.2
+      buildable: false
+    netcdf-fortran:
+      externals:
+      - spec: netcdf-fortran@4.6.1
+        prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/netcdf-fortran-4.6.1
+      buildable: false
+    parallel-netcdf:
+      externals:
+      - spec: parallel-netcdf@1.14.0
+        prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/parallel-netcdf-1.14.0
+      buildable: false
+{%- endif %}
