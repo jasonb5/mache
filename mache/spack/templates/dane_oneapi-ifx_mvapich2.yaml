@@ -119,12 +119,12 @@ spack:
 {%- if e3sm_hdf5_netcdf %}
     hdf5:
       externals:
-      - spec: hdf5@1.14.5~cxx~fortran+hl~java+mpi~szip~threadsafe+tools api=v114
+      - spec: hdf5@1.14.5
         prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/hdf5-1.14.5
       buildable: false
     netcdf-c:
       externals:
-      - spec: netcdf-c@4.9.2~parallel-netcdf
+      - spec: netcdf-c@4.9.2
         prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/netcdf-c-4.9.2
       buildable: false
     netcdf-fortran:
