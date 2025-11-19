@@ -88,6 +88,8 @@ spack:
       - spec: {{ mpi }}~cuda~debug+regcache+wrapperrpath ch3_rank_bits=32 file_systems=lustre,nfs,ufs
           process_managers=hydra threads=multiple
         prefix: /usr/tce/packages/mvapich2/mvapich2-2.3.7-intel-2023.2.1-magic
+        modules:
+        - mvapich2/2.3.7
       buildable: false
     gcc:
       externals:
@@ -104,6 +106,9 @@ spack:
       externals:
       - spec: {{ mkl }}
         prefix: /usr/tce/packages/mkl/mkl-2022.1.0
+        modules:
+        - mkl/2022.1.0 
+        - mkl-interfaces/2022.1.0 
       buildable: false
 {%- endif %}
     intel-oneapi-compilers:
@@ -115,26 +120,38 @@ spack:
             c: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icx
             cxx: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icpx
             fortran: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/ifx
+        modules:
+        - intel/2023.2.1-magic
+        - intel-oneapi-runtime/2023.2.0
+        - gcc-runtime/12.1.1
       buildable: false
 {%- if e3sm_hdf5_netcdf %}
     hdf5:
       externals:
       - spec: hdf5@1.14.5
         prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/hdf5-1.14.5
+        modules:
+        - hdf5/1.14.5
       buildable: false
     netcdf-c:
       externals:
       - spec: netcdf-c@4.9.2
         prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/netcdf-c-4.9.2
+        modules:
+        - netcdf-c/4.9.2
       buildable: false
     netcdf-fortran:
       externals:
       - spec: netcdf-fortran@4.6.1
         prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/netcdf-fortran-4.6.1
+        modules:
+        - netcdf-fortran/4.6.1 
       buildable: false
     parallel-netcdf:
       externals:
       - spec: parallel-netcdf@1.14.0
         prefix: /usr/workspace/e3sm/spack/dane/intel/libs/linux-sapphirerapids/parallel-netcdf-1.14.0
+        modules:
+        - parallel-netcdf/1.14.0
       buildable: false
 {%- endif %}
