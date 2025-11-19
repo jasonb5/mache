@@ -25,9 +25,9 @@ spack:
       compiler: [{{ compiler }}]
       providers:
         mpi: [{{ mpi }}]
-{{%- if e3sm_lapack %}}
+{%- if e3sm_lapack %}
         lapack: [{{ mkl }}]
-{{%- endif %}
+{%- endif %}
     curl:
       externals:
       - spec: curl@7.61.1+gssapi+ldap+nghttp2
