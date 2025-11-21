@@ -1,5 +1,5 @@
 {%- set compiler = "oneapi@2023.2.1" %}
-{%- set mpi = "mpich2@2.3.7" %}
+{%- set mpi = "mvapich2@2.3.7" %}
 {%- set mkl = "intel-oneapi-mkl@2022.1.0" %}
 
 spack:
