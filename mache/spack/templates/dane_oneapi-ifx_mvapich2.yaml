@@ -114,9 +114,9 @@ spack:
         prefix: /usr/tce/packages/intel/intel-2023.2.1-magic
         extra_attributes:
           compilers:
-            c: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64/icc
-            cxx: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64/icpc
-            fortran: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64/ifort
+            c: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icx
+            cxx: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icpx
+            fortran: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/ifx
         modules:
         - intel/2023.2.1-magic
         - intel-oneapi-runtime/2023.2.0
@@ -175,10 +175,10 @@ spack:
   - compiler:
       spec: {{ compiler }}
       paths:
-        cc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64/icc
-        cxx: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64/icpc
-        f77: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64/ifort
-        fc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/intel64
+        cc: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icx
+        cxx: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/icpx
+        f77: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/ifx
+        fc: /usr/tce/packages/intel/intel-2023.2.1-magic/bin/ifx
       flags: {}
       operating_system: rhel8
       target: x86_64
